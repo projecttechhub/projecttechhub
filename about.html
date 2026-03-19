@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About — projecTech Hub</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.page-hero { background:linear-gradient(135deg,var(--bg2) 0%,var(--surface2) 100%); padding:80px 6% 60px; border-bottom:1px solid var(--border); }
+.page-hero h1 { font-family:'Playfair Display',serif; font-size:clamp(2.2rem,4vw,3.5rem); font-weight:900; line-height:1.1; letter-spacing:-1px; margin-bottom:1rem; }
+.page-hero p { color:var(--muted); font-size:1rem; max-width:520px; }
+
+/* story */
+.story-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+.story-text h2 { font-family:'Playfair Display',serif; font-size:clamp(1.8rem,3vw,2.6rem); font-weight:800; line-height:1.15; letter-spacing:-0.5px; margin-bottom:1.2rem; }
+.story-text p { color:var(--muted); font-size:0.95rem; line-height:1.8; margin-bottom:1rem; }
+
+.story-visual {
+  position: relative;
+  height: 400px;
+}
+.story-card {
+  position: absolute;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 1.8rem;
+  box-shadow: var(--shadow-lg);
+}
+.story-card-main { width: 260px; top: 40px; left: 0; z-index: 2; }
+.story-card-float { width: 200px; top: 0; right: 0; z-index: 1; background: var(--accent); color:#fff; }
+.story-card-bottom { width: 220px; bottom: 30px; right: 30px; z-index: 3; background: var(--ink); color:#fff; }
+.s-icon { font-size:1.8rem; margin-bottom:0.7rem; }
+.s-title { font-family:'Playfair Display',serif; font-weight:700; font-size:0.95rem; margin-bottom:0.3rem; }
+.s-body { font-size:0.8rem; opacity:0.75; line-height:1.5; }
+.s-num { font-family:'Playfair Display',serif; font-size:2rem; font-weight:900; margin-top:0.4rem; }
+
+/* values */
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px,1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+.value-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  transition: all 0.28s;
+}
+.value-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.v-icon { font-size: 2rem; margin-bottom: 1rem; }
+.value-card h3 { font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:700; margin-bottom:0.5rem; }
+.value-card p { color:var(--muted); font-size:0.85rem; line-height:1.7; }
+
+/* team */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px,1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+.team-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: var(--shadow);
+  transition: all 0.28s;
+}
+.team-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.team-avatar {
+  width: 72px; height: 72px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-weight: 900; font-size: 1.4rem;
+  margin: 0 auto 1rem;
+}
+.team-card h4 { font-family:'Playfair Display',serif; font-weight:700; font-size:1rem; margin-bottom:0.2rem; }
+.team-role { color:var(--accent); font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:1px; margin-bottom:0.6rem; }
+.team-card p { color:var(--muted); font-size:0.82rem; line-height:1.6; }
+.team-tags { display:flex; flex-wrap:wrap; gap:0.3rem; justify-content:center; margin-top:0.8rem; }
+
+/* mission strip */
+.mission-strip {
+  background: var(--accent);
+  padding: 3rem 6%;
+  text-align: center;
+}
+.mission-strip h2 { font-family:'Playfair Display',serif; font-size:clamp(1.5rem,2.5vw,2.2rem); font-weight:900; color:#fff; margin-bottom:0.8rem; letter-spacing:-0.5px; }
+.mission-strip p { color:rgba(255,255,255,0.75); max-width:600px; margin:0 auto; font-size:0.95rem; }
+
+@media(max-width:860px) {
+  .story-layout { grid-template-columns: 1fr; }
+  .story-visual { height: 280px; }
+  .story-card-main { width: 200px; }
+  .story-card-float { width: 160px; }
+  .story-card-bottom { width: 175px; right:0; bottom:0; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="logo"><span class="small">projec</span><span class="BIG">T</span><span class="small">ech</span>&nbsp;<span class="hub">Hub</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="about.html" class="active">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="contact.html" class="nav-cta">Get Started</a></li>
+  </ul>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="page">
+  <div class="page-hero">
+    <div>
+      <span class="section-tag">Our Story</span>
+      <h1>Built by Engineers,<br>for Engineers</h1>
+      <p>projecTech Hub was founded by a group of B.Tech graduates who remembered the stress and struggle of final-year project season — and decided to change that for future students.</p>
+    </div>
+  </div>
+
+  <!-- STORY -->
+  <section style="background:var(--bg)">
+    <div class="container">
+      <div class="story-layout">
+        <div class="story-text reveal">
+          <span class="section-tag">Who We Are</span>
+          <h2>From Hyderabad, Serving Students Across India</h2>
+          <p>We started projecTech Hub in 2021 with one simple goal: make academic project development accessible, professional, and stress-free for every engineering student in India.</p>
+          <p>Our founding team includes IIT and NIT alumni, industry engineers from top tech companies, and passionate educators who have guided hundreds of students to top marks.</p>
+          <p>Today, we've delivered 500+ projects across 15+ domains and counting — from minor assignments to award-winning final-year major projects.</p>
+          <a href="contact.html" class="btn-primary" style="margin-top:1rem">Work With Us →</a>
+        </div>
+        <div class="story-visual reveal">
+          <div class="story-card story-card-main">
+            <div class="s-icon">🎓</div>
+            <div class="s-title">Founded with a Purpose</div>
+            <div class="s-body">Helping engineering students build real, impressive projects since 2021</div>
+          </div>
+          <div class="story-card story-card-float">
+            <div class="s-icon">⭐</div>
+            <div class="s-title">Satisfaction</div>
+            <div class="s-body">Guaranteed quality</div>
+            <div class="s-num">4.9/5</div>
+          </div>
+          <div class="story-card story-card-bottom">
+            <div class="s-icon">🚀</div>
+            <div class="s-title">Projects Delivered</div>
+            <div class="s-body">Across India since 2021</div>
+            <div class="s-num">500+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stat-strip">
+    <div class="stat-item"><span class="stat-num">2021</span><div class="stat-label">Founded</div></div>
+    <div class="stat-item"><span class="stat-num">500+</span><div class="stat-label">Projects Delivered</div></div>
+    <div class="stat-item"><span class="stat-num">200+</span><div class="stat-label">Happy Students</div></div>
+    <div class="stat-item"><span class="stat-num">98%</span><div class="stat-label">Distinction Rate</div></div>
+    <div class="stat-item"><span class="stat-num">15+</span><div class="stat-label">Tech Domains</div></div>
+  </div>
+
+  <!-- MISSION -->
+  <div class="mission-strip">
+    <h2>"Every student deserves a project they're proud to present."</h2>
+    <p>Our mission is to bridge the gap between academic requirements and real-world engineering — one project at a time.</p>
+  </div>
+
+  <!-- VALUES -->
+  <section style="background:var(--bg2)">
+    <div class="container">
+      <div class="reveal" style="text-align:center;max-width:540px;margin:0 auto">
+        <span class="section-tag">Our Values</span>
+        <h2 class="section-title">What We Stand For</h2>
+      </div>
+      <div class="values-grid">
+        <div class="value-card reveal"><div class="v-icon">🎯</div><h3>Academic Excellence</h3><p>Every project is crafted to meet and exceed university evaluation standards, with IEEE formatting and real-world complexity.</p></div>
+        <div class="value-card reveal"><div class="v-icon">🤝</div><h3>Student First</h3><p>We don't just deliver code — we ensure you understand it, can present it confidently, and own it completely.</p></div>
+        <div class="value-card reveal"><div class="v-icon">⚡</div><h3>Speed & Reliability</h3><p>Deadlines are sacred. We've never missed a promised delivery date. Express delivery available for tight timelines.</p></div>
+        <div class="value-card reveal"><div class="v-icon">🔍</div><h3>Originality</h3><p>Zero plagiarism, zero copy-paste. Every project is built from scratch with original code and fresh documentation.</p></div>
+        <div class="value-card reveal"><div class="v-icon">💡</div><h3>Real-World Relevance</h3><p>We use industry-standard tools and methodologies so your project skills translate directly to job interviews and internships.</p></div>
+        <div class="value-card reveal"><div class="v-icon">🛡️</div><h3>Transparency</h3><p>No hidden charges, no vague timelines. Clear pricing, milestone updates, and honest communication throughout.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM -->
+  <section style="background:var(--bg)">
+    <div class="container">
+      <div class="reveal" style="text-align:center;max-width:540px;margin:0 auto">
+        <span class="section-tag">Our Team</span>
+        <h2 class="section-title">Meet the Experts<br>Behind Your Projects</h2>
+      </div>
+      <div class="team-grid">
+        <div class="team-card reveal">
+          <div class="team-avatar" style="background:rgba(212,84,10,0.12);color:var(--accent)">RV</div>
+          <h4>Rohit Varma</h4>
+          <div class="team-role">Founder & Lead AI Engineer</div>
+          <p>IIT Hyderabad alumni. Ex-Google engineer with 6+ years in ML and computer vision systems.</p>
+          <div class="team-tags"><span class="tag tag-orange">AI/ML</span><span class="tag tag-blue">Python</span></div>
+        </div>
+        <div class="team-card reveal">
+          <div class="team-avatar" style="background:rgba(37,99,235,0.12);color:var(--accent2)">AS</div>
+          <h4>Anusha Srinivas</h4>
+          <div class="team-role">Full-Stack Lead</div>
+          <p>NIT Warangal alumni. 5 years at Infosys. Expert in React, Node.js, and cloud-native development.</p>
+          <div class="team-tags"><span class="tag tag-blue">React</span><span class="tag tag-green">Node.js</span></div>
+        </div>
+        <div class="team-card reveal">
+          <div class="team-avatar" style="background:rgba(5,150,105,0.12);color:var(--accent3)">KR</div>
+          <h4>Karthik Reddy</h4>
+          <div class="team-role">IoT & Embedded Expert</div>
+          <p>BITS Pilani ECE graduate. Hardware enthusiast with 4+ years building IoT products for startups.</p>
+          <div class="team-tags"><span class="tag tag-green">IoT</span><span class="tag tag-orange">Arduino</span></div>
+        </div>
+        <div class="team-card reveal">
+          <div class="team-avatar" style="background:rgba(140,127,116,0.15);color:var(--muted)">PM</div>
+          <h4>Preethi Murthy</h4>
+          <div class="team-role">Documentation Specialist</div>
+          <p>M.Tech from JNTU with expertise in IEEE report writing, SRS documents, and academic presentations.</p>
+          <div class="team-tags"><span class="tag tag-brown">IEEE</span><span class="tag tag-blue">Reports</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section style="background:var(--surface2)">
+    <div class="container">
+      <div class="cta-block reveal">
+        <h2>Ready to Work with Our Team?</h2>
+        <p>Tell us about your project and we'll match you with the right expert within 2 hours.</p>
+        <div class="cta-btns">
+          <a href="contact.html" class="btn-primary btn-white" style="color:var(--ink)">Start a Project</a>
+          <a href="projects.html" class="btn-outline btn-ghost">View Our Work</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><span class="small">projec</span><span class="BIG">T</span><span class="small">ech</span>&nbsp;<span class="hub" style="color:#fff">Hub</span></a>
+        <p>India's most trusted platform for B.Tech & Degree academic project development.</p>
+      </div>
+      <div><h5>Services</h5><ul><li><a href="services.html">AI & Machine Learning</a></li><li><a href="services.html">Web Development</a></li><li><a href="services.html">Mobile Apps</a></li><li><a href="services.html">IoT Projects</a></li></ul></div>
+      <div><h5>Quick Links</h5><ul><li><a href="projects.html">Project Portfolio</a></li><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><h5>Contact</h5><ul><li><a href="#">projects@projectechhub.in</a></li><li><a href="#">+91 98765 43210</a></li><li><a href="#">Hyderabad, Telangana</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 projecTech Hub. Made with ❤️ in Hyderabad, India.</span>
+      <div class="social-links"><a href="#">📸</a><a href="#">💼</a><a href="#">▶️</a><a href="#">✈️</a></div>
+    </div>
+  </div>
+</footer>
+<script src="main.js"></script>
+</body>
+</html>

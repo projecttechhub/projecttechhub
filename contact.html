@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — projecTech Hub</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.page-hero { background:linear-gradient(135deg,var(--bg2) 0%,var(--surface2) 100%); padding:80px 6% 60px; border-bottom:1px solid var(--border); }
+.page-hero h1 { font-family:'Playfair Display',serif; font-size:clamp(2.2rem,4vw,3.5rem); font-weight:900; line-height:1.1; letter-spacing:-1px; margin-bottom:1rem; }
+.page-hero p { color:var(--muted); font-size:1rem; max-width:480px; }
+
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 4rem;
+  align-items: start;
+}
+
+/* Info side */
+.contact-info-list { display:flex; flex-direction:column; gap:1.5rem; margin-top:2.5rem; }
+.ci-item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+.ci-icon {
+  width: 46px; height: 46px;
+  border-radius: 13px;
+  background: rgba(212,84,10,0.08);
+  border: 1px solid rgba(212,84,10,0.12);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem;
+  flex-shrink: 0;
+}
+.ci-item h4 { font-weight:700; font-size:0.88rem; margin-bottom:0.2rem; }
+.ci-item p { color:var(--muted); font-size:0.84rem; line-height:1.6; }
+.ci-item a { color:var(--accent); text-decoration:none; font-weight:600; }
+
+.hours-card {
+  background: var(--ink);
+  border-radius: 16px;
+  padding: 1.8rem;
+  margin-top: 2rem;
+}
+.hours-card h4 { color:#fff; font-family:'Playfair Display',serif; font-size:1rem; font-weight:700; margin-bottom:1rem; }
+.hours-row { display:flex; justify-content:space-between; font-size:0.83rem; padding:0.5rem 0; border-bottom:1px solid rgba(255,255,255,0.07); }
+.hours-row:last-child { border:none; }
+.hours-row .day { color:rgba(255,255,255,0.5); }
+.hours-row .time { color:#fff; font-weight:600; }
+
+.wa-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  background: #25D366;
+  color: #fff;
+  padding: 0.9rem 1.5rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-top: 1.5rem;
+  transition: all 0.2s;
+  box-shadow: 0 4px 16px rgba(37,211,102,0.25);
+}
+.wa-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,211,102,0.35); }
+
+/* Form side */
+.form-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2.5rem;
+  box-shadow: var(--shadow-lg);
+}
+.form-card h3 { font-family:'Playfair Display',serif; font-size:1.4rem; font-weight:800; margin-bottom:0.4rem; }
+.form-card > p { color:var(--muted); font-size:0.88rem; margin-bottom:2rem; }
+
+.btn-submit {
+  width: 100%;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  padding: 1rem;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.22s;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  box-shadow: 0 4px 16px rgba(212,84,10,0.25);
+  display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+}
+.btn-submit:hover { background:#b84508; transform:translateY(-2px); box-shadow:0 8px 24px rgba(212,84,10,0.35); }
+.btn-submit:disabled { background:#c8b4aa; cursor:not-allowed; transform:none; box-shadow:none; }
+
+.success-banner {
+  background: rgba(5,150,105,0.08);
+  border: 1.5px solid rgba(5,150,105,0.2);
+  border-radius: 12px;
+  padding: 1.2rem 1.5rem;
+  color: var(--accent3);
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: none;
+  align-items: center;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+.success-banner.show { display: flex; }
+
+/* guarantee strip */
+.guarantee-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+.g-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 1.5rem;
+  text-align: center;
+  box-shadow: var(--shadow);
+}
+.g-icon { font-size: 2rem; margin-bottom: 0.6rem; }
+.g-card h4 { font-family:'Playfair Display',serif; font-weight:700; font-size:0.95rem; margin-bottom:0.3rem; }
+.g-card p { color:var(--muted); font-size:0.8rem; }
+
+@media(max-width:860px) {
+  .contact-layout { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="logo"><span class="small">projec</span><span class="BIG">T</span><span class="small">ech</span>&nbsp;<span class="hub">Hub</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="projects.html">Projects</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
+    <li><a href="contact.html" class="nav-cta">Get Started</a></li>
+  </ul>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="page">
+  <div class="page-hero">
+    <div>
+      <span class="section-tag">Get In Touch</span>
+      <h1>Let's Build Your<br>Perfect Project</h1>
+      <p>Fill the form and our team will reach out within 2 hours with a personalised plan, timeline, and quote.</p>
+    </div>
+  </div>
+
+  <section style="background:var(--bg)">
+    <div class="container">
+      <div class="contact-layout">
+
+        <!-- INFO SIDE -->
+        <div class="reveal">
+          <span class="section-tag">Reach Us</span>
+          <h2 class="section-title" style="font-size:1.8rem">Multiple Ways to<br>Connect With Us</h2>
+          <div class="contact-info-list">
+            <div class="ci-item">
+              <div class="ci-icon">📧</div>
+              <div><h4>Email Us</h4><p><a href="mailto:projects@projecttechhub.com">projects@projecttechhub.com</a><br>We reply within 2 business hours.</p></div>
+            </div>
+            <div class="ci-item">
+              <div class="ci-icon">📞</div>
+              <div><h4>Call / WhatsApp</h4><p><a href="tel:+919100792253">+91 9100792253</a><br>Available Mon–Sat, 9 AM to 9 PM IST.</p></div>
+            </div>
+            <div class="ci-item">
+              <div class="ci-icon">📍</div>
+              <div><h4>Location</h4><p>Hyderabad, Telangana, India<br>Serving students Pan-India & globally.</p></div>
+            </div>
+            <div class="ci-item">
+              <div class="ci-icon">⚡</div>
+              <div><h4>Response Guarantee</h4><p>We guarantee a response within 2 hours on all business days. Emergency queries answered instantly on WhatsApp.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FORM SIDE -->
+        <div class="reveal">
+          <img src="contact_page.png" alt="Contact Form" style="width:100%;border-radius:12px;margin-bottom:1.5rem;">
+        </div>
+                  <a href="https://wa.me/919876543210" class="wa-btn">
+            <span style="font-size:1.3rem">💬</span> Chat on WhatsApp Instantly
+          </a>
+
+          <div class="hours-card">
+            <h4>⏰ Working Hours</h4>
+            <div class="hours-row"><span class="day">Monday – Friday</span><span class="time">9:00 AM – 9:00 PM</span></div>
+            <div class="hours-row"><span class="day">Saturday</span><span class="time">9:00 AM – 6:00 PM</span></div>
+            <div class="hours-row"><span class="day">Sunday</span><span class="time">Emergency support only</span></div>
+          </div>
+      </div>
+
+      <!-- GUARANTEES -->
+      <div class="reveal" style="margin-top:5rem;text-align:center">
+        <span class="section-tag">Our Guarantees</span>
+        <h2 class="section-title">Why Students Trust Us</h2>
+      </div>
+      <div class="guarantee-grid reveal">
+        <div class="g-card"><div class="g-icon">⏱️</div><h4>2-Hour Response</h4><p>We respond to every inquiry within 2 business hours, guaranteed.</p></div>
+        <div class="g-card"><div class="g-icon">🔄</div><h4>Free Revisions</h4><p>Minor: 1 round. Major: 3 rounds. We perfect until you're satisfied.</p></div>
+        <div class="g-card"><div class="g-icon">📄</div><h4>Plagiarism-Free</h4><p>100% original code and documentation. Reports available on request.</p></div>
+        <div class="g-card"><div class="g-icon">🎓</div><h4>Viva Support</h4><p>Coaching sessions included so you can confidently present your project.</p></div>
+        <div class="g-card"><div class="g-icon">🔒</div><h4>50% Advance Model</h4><p>You pay 50% upfront and 50% only after delivery. Transparent and fair.</p></div>
+        <div class="g-card"><div class="g-icon">📅</div><h4>On-Time Delivery</h4><p>We've never missed a promised deadline. Your submission date is sacred to us.</p></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><span class="small">projec</span><span class="BIG">T</span><span class="small">ech</span>&nbsp;<span class="hub" style="color:#fff">Hub</span></a>
+        <p>India's most trusted platform for B.Tech & Degree academic project development.</p>
+      </div>
+      <div><h5>Services</h5><ul><li><a href="services.html">AI & Machine Learning</a></li><li><a href="services.html">Web Development</a></li><li><a href="services.html">Mobile Apps</a></li><li><a href="services.html">IoT Projects</a></li></ul></div>
+      <div><h5>Quick Links</h5><ul><li><a href="projects.html">Project Portfolio</a></li><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><h5>Contact</h5><ul><li><a href="#">projects@projectechhub.in</a></li><li><a href="#">+91 98765 43210</a></li><li><a href="#">Hyderabad, Telangana</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 projecTech Hub. Made with ❤️ in Hyderabad, India.</span>
+      <div class="social-links"><a href="#">📸</a><a href="#">💼</a><a href="#">▶️</a><a href="#">✈️</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+function handleSubmit() {
+  const required = ['name','phone','college','branch','deadline','type','domain','requirements'];
+  let valid = true;
+  required.forEach(id => {
+    const el = document.getElementById(id);
+    if (!el.value.trim()) { el.style.borderColor='#e53e3e'; valid=false; }
+    else el.style.borderColor='';
+  });
+  if (!valid) { alert('Please fill in all required fields.'); return; }
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  btn.textContent = '⏳ Submitting...';
+  setTimeout(() => {
+    btn.textContent = '✅ Submitted!';
+    document.getElementById('successBanner').classList.add('show');
+    document.querySelectorAll('input, select, textarea').forEach(el => el.value = '');
+  }, 1200);
+}
+</script>
+</body>
+</html>

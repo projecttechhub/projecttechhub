@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — projecTech Hub</title>
+<link rel="stylesheet" href="style.css">
+<style>
+.page-hero { background:linear-gradient(135deg,var(--bg2) 0%,var(--surface2) 100%); padding:80px 6% 60px; border-bottom:1px solid var(--border); }
+.page-hero h1 { font-family:'Playfair Display',serif; font-size:clamp(2.2rem,4vw,3.5rem); font-weight:900; line-height:1.1; letter-spacing:-1px; margin-bottom:1rem; }
+.page-hero p { color:var(--muted); font-size:1rem; max-width:520px; }
+
+.filter-bar {
+  display: flex;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.5rem;
+  padding: 1rem 0;
+  position: sticky;
+  top: 68px;
+  background: var(--bg);
+  z-index: 10;
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 6%;
+  margin: 0 -6%;
+  margin-bottom: 2.5rem;
+}
+.filter-btn {
+  padding: 0.5rem 1.2rem;
+  border-radius: 50px;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--ink2);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  box-shadow: var(--shadow);
+}
+.filter-btn.active, .filter-btn:hover {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+  box-shadow: 0 4px 16px rgba(212,84,10,0.25);
+}
+
+.proj-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(310px,1fr));
+  gap: 1.5rem;
+}
+.proj-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  transition: transform 0.28s, box-shadow 0.28s, opacity 0.3s;
+  display: flex;
+  flex-direction: column;
+}
+.proj-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
+.proj-card.hidden { display:none; }
+.proj-thumb {
+  height: 165px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 3.2rem;
+  background: var(--surface2);
+  position: relative;
+  overflow: hidden;
+}
+.proj-thumb-bg {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(circle at 30% 70%, rgba(212,84,10,0.07) 0%, transparent 60%),
+                    radial-gradient(circle at 70% 30%, rgba(37,99,235,0.05) 0%, transparent 60%);
+}
+.proj-body { padding: 1.5rem; flex: 1; display: flex; flex-direction: column; }
+.proj-tags { display:flex; gap:0.4rem; flex-wrap:wrap; margin-bottom:0.7rem; }
+.proj-body h3 { font-family:'Playfair Display',serif; font-size:1.05rem; font-weight:700; margin-bottom:0.5rem; }
+.proj-body > p { color:var(--muted); font-size:0.84rem; line-height:1.65; flex:1; }
+.proj-tech { display:flex; gap:0.4rem; flex-wrap:wrap; margin-top:0.8rem; }
+.proj-tech span { font-size:0.72rem; font-weight:600; color:var(--muted); background:var(--surface2); border:1px solid var(--border); padding:0.2rem 0.6rem; border-radius:50px; }
+.proj-footer {
+  display: flex; justify-content:space-between; align-items:center;
+  margin-top: 1rem; padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+/* Empty state */
+.empty-state { text-align:center; padding:4rem; color:var(--muted); display:none; }
+.empty-state.show { display:block; }
+
+/* CTA mini */
+.projects-cta {
+  background: var(--ink);
+  border-radius: 20px;
+  padding: 3rem 2.5rem;
+  text-align: center;
+  margin-top: 4rem;
+}
+.projects-cta h3 { font-family:'Playfair Display',serif; font-size:1.8rem; font-weight:900; color:#fff; margin-bottom:0.7rem; }
+.projects-cta p { color:rgba(255,255,255,0.5); margin-bottom:1.5rem; font-size:0.9rem; }
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="logo"><span class="small">projec</span><span class="BIG">T</span><span class="small">ech</span>&nbsp;<span class="hub">Hub</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="services.html">Services</a></li>
+    <li><a href="projects.html" class="active">Projects</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="contact.html">Contact</a></li>
+    <li><a href="contact.html" class="nav-cta">Get Started</a></li>
+  </ul>
+  <div class="hamburger"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="page">
+  <div class="page-hero">
+    <div>
+      <span class="section-tag">Project Portfolio</span>
+      <h1>Projects That Scored<br>Top Marks</h1>
+      <p>Browse our curated collection of minor and major projects across all engineering domains — each built, tested, and delivered to earn distinction.</p>
+    </div>
+  </div>
+
+  <section style="background:var(--bg)">
+    <div class="container">
+      <div class="filter-bar">
+        <button class="filter-btn active" onclick="filter('all',this)">All Projects</button>
+        <button class="filter-btn" onclick="filter('ai',this)">AI / ML</button>
+        <button class="filter-btn" onclick="filter('web',this)">Web Dev</button>
+        <button class="filter-btn" onclick="filter('iot',this)">IoT</button>
+        <button class="filter-btn" onclick="filter('mobile',this)">Mobile App</button>
+        <button class="filter-btn" onclick="filter('security',this)">Cybersecurity</button>
+        <button class="filter-btn" onclick="filter('data',this)">Data Science</button>
+        <button class="filter-btn" onclick="filter('minor',this)">Minor Only</button>
+        <button class="filter-btn" onclick="filter('major',this)">Major Only</button>
+      </div>
+
+      <div class="proj-grid" id="projGrid">
+
+        <div class="proj-card reveal" data-cat="ai major">
+          <div class="proj-thumb"><div class="proj-thumb-bg"></div>🧠</div>
+          <div class="proj-body">
+            <div class="proj-tags"><span class="tag tag-orange">AI / ML</span><span class="tag tag-blue">CNN</span></div>
+            <h3>Real-Time Emotion Detection</h3>
+            <p>CNN-based facial emotion recognition with OpenCV. Detects 7 emotions in live video with 94% accuracy. Includes web dashboard with emotion timeline graph.</p>
+            <div class="proj-tech"><span>Python</span><span>TensorFlow</span><span>OpenCV</span><span>Flask</span></div>
+            <div class="proj-footer">
+              <span class="level-badge major"><span class="level-dot"></span> Major Project</span>
+              <a href="contact.html" style="color:var(--accent);font-size:0.8rem;font-weight:700;text-decoration:none">Order This →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-card reveal" data-cat="web major">
+          <div class="proj-thumb"><div class="proj-thumb-bg"></div>🛒</div>
+          <div class="proj-body">
+            <div class="proj-tags"><span class="tag tag-blue">Web Dev</span><span class="tag tag-orange">Full Stack</span></div>
+            <h3>Multi-Vendor E-Commerce Platform</h3>
+            <p>Complete marketplace with React frontend, Node.js/Express backend, MongoDB, Razorpay payment, vendor & admin dashboards, and analytics.</p>
+            <div class="proj-tech"><span>React</span><span>Node.js</span><span>MongoDB</span><span>Razorpay</span></div>
+            <div class="proj-footer">
+              <span class="level-badge major"><span class="level-dot"></span> Major Project</span>
+              <a href="contact.html" style="color:var(--accent);font-size:0.8rem;font-weight:700;text-decoration:none">Order This →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-card reveal" data-cat="iot minor">
+          <div class="proj-thumb"><div class="proj-thumb-bg"></div>🌿</div>
+          <div class="proj-body">
+            <div class="proj-tags"><span class="tag tag-green">IoT</span><span class="tag tag-orange">Embedded</span></div>
+            <h3>Smart Agriculture Monitoring</h3>
+            <p>ESP32 with soil moisture, temperature & humidity sensors. Real-time ThingSpeak dashboard with automated irrigation relay control.</p>
+            <div class="proj-tech"><span>ESP32</span><span>Arduino IDE</span><span>ThingSpeak</span></div>
+            <div class="proj-footer">
+              <span class="level-badge minor"><span class="level-dot"></span> Minor Project</span>
+              <a href="contact.html" style="color:var(--accent);font-size:0.8rem;font-weight:700;text-decoration:none">Order This →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-card reveal" data-cat="ai major">
+          <div class="proj-thumb"><div class="proj-thumb-bg"></div>💬</div>
+          <div class="proj-body">
+            <div class="proj-tags"><span class="tag tag-orange">NLP</span><span class="tag tag-blue">AI</span></div>
+            <h3>AI Mental Health Chatbot</h3>
+            <p>BERT-based conversational agent with sentiment analysis, crisis keyword detection, therapist recommendation, and mood tracking over sessions.</p>
+            <div class="proj-tech"><span>Python</span><span>BERT</span><span>Flask</span><span>React</span></div>
+            <div class="proj-footer">
+              <span class="level-badge major"><span class="level-dot"></span> Major Project</span>
+              <a href="contact.html" style="color:var(--accent);font-size:0.8rem;font-weight:700;text-decoration:none">Order This →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-card reveal" data-cat="mobile major">
+          <div class="proj-thumb"><div class="proj-thumb-bg"></div>📚</div>
+          <div class="proj-body">
+            <div class="proj-tags"><span class="tag tag-green">Mobile</span><span class="tag tag-blue">Flutter</span></div>
+            <h3>Student Learning Management App</h3>
+            <p>Flutter LMS with video lectures, live quizzes, progress tracking, offline mode, certificate generation, and teacher panel.</p>
+            <div class="proj-tech"><span>Flutter</span><span>Firebase</span><span>Node.js</span><span>MongoDB</span></div>
+            <div class="proj-footer">
+              <span class="level-badge major"><span class="level-dot"></span> Major Project</span>
+              <a href="contact.html" style="color:var(--accent);font-size:0.8rem;font-weight:700;text-decoration:none">Order This →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-card reveal" data-cat="security minor">
+          <div class="proj-thumb"><div class="proj-thumb-bg"></div>🔒</div>
+          <div class="proj-body">
+            <div class="proj-tags"><span class="tag tag-orange">Security</span><span class="tag tag-blue">ML</span></div>
+            <h3>Network Intrusion Detection</h3>
+            <p>ML-based NIDS trained on NSL-KDD dataset. Random Forest classifier with 97% detection rate and live packet sniffing dashboard.</p>
+            <div class="proj-tech"><span>Python</span><span>Scapy</span><span>sklearn</span><span>Dash</span></div>
+            <div class="proj-footer">
+              <span class="level-badge minor"><span class="level-dot"></span> Minor Project</span>
+              <a href="contact.html" style="color:var(--accent);font-size:0.8rem;font-weight:700;text-decoration:none">Order This →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-card reveal" data-cat="web major">
+          <div class="proj-thumb"><div class="proj-thumb-bg"></div>🏥</div>
+          <div class="proj-body">
+            <div class="proj-tags"><span class="tag tag-blue">Web Dev</span><span class="tag tag-green">Django</span></div>
+            <h3>Hospital Management System</h3>
+            <p>Complete HMS with patient records, doctor scheduling, billing, pharmacy inventory, lab reports, and role-based access control.</p>
+            <div class="proj-tech"><span>Django</span><span>PostgreSQL</span><span>Bootstrap</span><span>Chart.js</span></div>
+            <div class="proj-footer">
+              <span class="level-badge major"><span class="level-dot"></span> Major Project</span>
+              <a href="contact.html" style="color:var(--accent);font-size:0.8rem;font-weight:700;text-decoration:none">Order This →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-card reveal" data-cat="iot minor">
+          <div class="proj-thumb"><div class="proj-thumb-bg"></div>🚗</div>
+          <div class="proj-body">
+            <div class="proj-tags"><span class="tag tag-orange">IoT</span><span class="tag tag-blue">Computer Vision</span></div>
+            <h3>Autonomous Obstacle Avoidance Car</h3>
+            <p>Raspberry Pi robot with ultrasonic sensors, camera module, and OpenCV lane detection. Bluetooth control via mobile app.</p>
+            <div class="proj-tech"><span>Raspberry Pi</span><span>OpenCV</span><span>Python</span><span>L298N</span></div>
+            <div class="proj-footer">
+              <span class="level-badge minor"><span class="level-dot"></span> Minor Project</span>
+              <a href="contact.html" style="color:var(--accent);font-size:0.8rem;font-weight:700;text-decoration:none">Order This →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-card reveal" data-cat="ai major">
+          <div class="proj-thumb"><div class="proj-thumb-bg"></div>🩺</div>
+          <div class="proj-body">
+            <div class="proj-tags"><span class="tag tag-orange">AI / ML</span><span class="tag tag-green">Healthcare</span></div>
+            <h3>Multi-Disease Prediction System</h3>
+            <p>Predicts diabetes, heart disease, and cancer risk using ensemble ML models with explainable AI (SHAP) and a React-based doctor interface.</p>
+            <div class="proj-tech"><span>Python</span><span>XGBoost</span><span>SHAP</span><span>React</span></div>
+            <div class="proj-footer">
+              <span class="level-badge major"><span class="level-dot"></span> Major Project</span>
+              <a href="contact.html" style="color:var(--accent);font-size:0.8rem;font-weight:700;text-decoration:none">Order This →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-card reveal" data-cat="data minor">
+          <div class="proj-thumb"><div class="proj-thumb-bg"></div>📊</div>
+          <div class="proj-body">
+            <div class="proj-tags"><span class="tag tag-blue">Data Science</span><span class="tag tag-orange">Analytics</span></div>
+            <h3>Sales Trend Analysis Dashboard</h3>
+            <p>Power BI / Plotly Dash dashboard with interactive filters, KPI cards, forecasting using ARIMA, and exportable reports.</p>
+            <div class="proj-tech"><span>Python</span><span>Pandas</span><span>Plotly</span><span>Power BI</span></div>
+            <div class="proj-footer">
+              <span class="level-badge minor"><span class="level-dot"></span> Minor Project</span>
+              <a href="contact.html" style="color:var(--accent);font-size:0.8rem;font-weight:700;text-decoration:none">Order This →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-card reveal" data-cat="mobile minor">
+          <div class="proj-thumb"><div class="proj-thumb-bg"></div>💰</div>
+          <div class="proj-body">
+            <div class="proj-tags"><span class="tag tag-green">Mobile</span><span class="tag tag-blue">React Native</span></div>
+            <h3>Personal Finance Tracker App</h3>
+            <p>Cross-platform expense management app with budget categories, visual spending charts, monthly reports, and cloud sync via Firebase.</p>
+            <div class="proj-tech"><span>React Native</span><span>Firebase</span><span>Redux</span><span>Chart Kit</span></div>
+            <div class="proj-footer">
+              <span class="level-badge minor"><span class="level-dot"></span> Minor Project</span>
+              <a href="contact.html" style="color:var(--accent);font-size:0.8rem;font-weight:700;text-decoration:none">Order This →</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="proj-card reveal" data-cat="security major">
+          <div class="proj-thumb"><div class="proj-thumb-bg"></div>🕵️</div>
+          <div class="proj-body">
+            <div class="proj-tags"><span class="tag tag-orange">Security</span><span class="tag tag-blue">Forensics</span></div>
+            <h3>Digital Forensics Analysis Tool</h3>
+            <p>File metadata extractor, deleted file recovery, log analyzer, and hash verification tool. GUI built with Tkinter. Generates forensic reports automatically.</p>
+            <div class="proj-tech"><span>Python</span><span>Tkinter</span><span>Volatility</span><span>Autopsy</span></div>
+            <div class="proj-footer">
+              <span class="level-badge major"><span class="level-dot"></span> Major Project</span>
+              <a href="contact.html" style="color:var(--accent);font-size:0.8rem;font-weight:700;text-decoration:none">Order This →</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="projects-cta reveal">
+        <h3>Don't See Your Topic?</h3>
+        <p>We build 100% custom projects on request. Share your idea and we'll make it happen.</p>
+        <a href="contact.html" class="btn-primary" style="background:#fff;color:var(--ink)">Request Custom Project →</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><span class="small">projec</span><span class="BIG">T</span><span class="small">ech</span>&nbsp;<span class="hub" style="color:#fff">Hub</span></a>
+        <p>India's most trusted platform for B.Tech & Degree academic project development.</p>
+      </div>
+      <div><h5>Services</h5><ul><li><a href="services.html">AI & Machine Learning</a></li><li><a href="services.html">Web Development</a></li><li><a href="services.html">Mobile Apps</a></li><li><a href="services.html">IoT Projects</a></li></ul></div>
+      <div><h5>Quick Links</h5><ul><li><a href="projects.html">Project Portfolio</a></li><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div><h5>Contact</h5><ul><li><a href="#">projects@projectechhub.in</a></li><li><a href="#">+91 98765 43210</a></li><li><a href="#">Hyderabad, Telangana</a></li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 projecTech Hub. Made with ❤️ in Hyderabad, India.</span>
+      <div class="social-links"><a href="#">📸</a><a href="#">💼</a><a href="#">▶️</a><a href="#">✈️</a></div>
+    </div>
+  </div>
+</footer>
+
+<script src="main.js"></script>
+<script>
+function filter(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  const cards = document.querySelectorAll('.proj-card');
+  cards.forEach(c => {
+    const cats = c.dataset.cat || '';
+    c.classList.toggle('hidden', cat !== 'all' && !cats.includes(cat));
+  });
+}
+</script>
+</body>
+</html>
